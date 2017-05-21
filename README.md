@@ -1,4 +1,4 @@
-![jcenter](https://img.shields.io/badge/_jcenter_-_3.8.0.1-6688ff.png?style=flat) &#x2003; ![jcenter](https://img.shields.io/badge/_Tests_-_59/59-green.png?style=flat) &#x2003; ![jcenter](https://img.shields.io/badge/_Coverage_-_78%25-blue.png?style=flat)
+![jcenter](https://img.shields.io/badge/_jcenter_-_1.0.0-6688ff.png?style=flat) &#x2003; ![jcenter](https://img.shields.io/badge/_Tests_-_4/4-green.png?style=flat) &#x2003; ![jcenter](https://img.shields.io/badge/_Coverage_-_100%25-blue.png?style=flat)
 # kotlin json
 A kotlin library providing a nice syntax for creating json objects.
 
@@ -8,7 +8,7 @@ The maven artifacts are on [Bintray](https://bintray.com/programingjd/maven/info
 and [jcenter](https://bintray.com/search?query=info.jdavid.kotlin).
 
 [Download](https://bintray.com/artifact/download/programingjd/maven/info/jdavid/kotlin/json/1.0.0/json-1.0.0.jar) the latest jar.
-
+[Download](https://bintray.com/artifact/download/programingjd/maven/info/jdavid/kotlin/1.0.0/json-1.0.0.jar) the latest jar.
 __Maven__
 
 Include [those settings](https://bintray.com/repo/downloadMavenRepoSettingsFile/downloadSettings?repoPath=%2Fbintray%2Fjcenter)
@@ -18,7 +18,7 @@ Include [those settings](https://bintray.com/repo/downloadMavenRepoSettingsFile/
   <groupId>info.jdavid.kotlin</groupId>
   <artifactId>json</artifactId>
   <version>1.0.0</version>
-</dependency>
+  <version>1.0.0</version>
 ```
 __Gradle__
 
@@ -31,7 +31,7 @@ repositories {
 ```
 dependencies {
   compile 'info.jdavid.kotlin:json:1.0.0'
-}
+  compile 'info.jdavid.kotlin:json:1.0.0'
 ```
 
 ## Usage ##
