@@ -84,7 +84,7 @@ test {
     String color = failed == 0 ? 'green' : (failed < 3 ? 'yellow' : 'red')
     String v = project.version
     def download =
-      "https://bintray.com/artifact/download/programingjd/maven/info/jdavid/kotlin/$v/json-${v}.jar"
+      "https://bintray.com/artifact/download/programingjd/maven/info/jdavid/kotlin/json/$v/json-${v}.jar"
     readme.readLines().withIndex().collect { line, i ->
       switch (i) {
         case 0:

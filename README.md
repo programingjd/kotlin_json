@@ -7,7 +7,7 @@ A kotlin library providing a nice syntax for creating json objects.
 The maven artifacts are on [Bintray](https://bintray.com/programingjd/maven/info.jdavid.kotlin.json/view)
 and [jcenter](https://bintray.com/search?query=info.jdavid.kotlin.json).
 
-[Download](https://bintray.com/artifact/download/programingjd/maven/info/jdavid/kotlin/1.0.0/json-1.0.0.jar) the latest jar.
+[Download](https://bintray.com/artifact/download/programingjd/maven/info/jdavid/kotlin/json/1.0.0/json-1.0.0.jar) the latest jar.
 
 __Maven__
 
