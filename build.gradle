@@ -66,15 +66,13 @@ test {
     int missed =
       (firstBarImgs.size() == 1 ? 0 : firstBarImgs.first().attr('title').replaceAll(',','') as int) +
       (lastBarImgs.size() == 1 ? 0 : lastBarImgs.first().attr('title').replaceAll(',','') as int)
-    println missed
     int all =
       (firstBarImgs.last().attr('title').replaceAll(',','') as int) +
       (lastBarImgs.last().attr('title').replaceAll(',','') as int) + missed
-    println all
     int coverage = (100 * (all - missed) / all) as int
     def readme = file('README.md')
     def badge = { String label, String text, String color ->
-      "https://img.shields.io/badge/_${label}_-_${text}-${color}.png?style=flat"
+      "https://img.shields.io/badge/_${label}_-${text}-${color}.png?style=flat"
     }
     String color = failed == 0 ? 'green' : (failed < 3 ? 'yellow' : 'red')
     String v = project.version

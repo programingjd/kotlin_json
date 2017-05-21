@@ -1,4 +1,4 @@
-![jcenter](https://img.shields.io/badge/_jcenter_-_1.0.0-6688ff.png?style=flat) &#x2003; ![jcenter](https://img.shields.io/badge/_Tests_-_4/4-green.png?style=flat) &#x2003; ![jcenter](https://img.shields.io/badge/_Coverage_-_100%25-blue.png?style=flat)
+![jcenter](https://img.shields.io/badge/_jcenter_-1.0.0-6688ff.png?style=flat) &#x2003; ![jcenter](https://img.shields.io/badge/_Tests_-4/4-green.png?style=flat) &#x2003; ![jcenter](https://img.shields.io/badge/_Coverage_-100%25-blue.png?style=flat)
 # kotlin json
 A kotlin library providing a nice syntax for creating json objects.
 
