@@ -31,7 +31,8 @@ repositories {
 }
 
 dependencies {
-  compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+  compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+  testCompile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
   testCompile 'junit:junit:4.12'
 }
 
@@ -108,3 +109,17 @@ artifacts {
   archives sourcesJar, javadocJar
 }
 
+publishing {
+  publications {
+    mavenJava(MavenPublication) {
+      from components.java
+      artifact sourcesJar
+      artifact javadocJar
+    }
+  }
+  repositories {
+    maven {
+      url "$buildDir/repo"
+    }
+  }
+}

@@ -1,4 +1,4 @@
-package info.javid.kotlin.json
+package info.jdavid.kotlin.json
 
 import org.junit.Assert.*
 import org.junit.Test
