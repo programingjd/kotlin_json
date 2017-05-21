@@ -36,6 +36,12 @@ dependencies {
   testCompile 'junit:junit:4.12'
 }
 
+compileKotlin {
+  kotlinOptions {
+    jvmTarget = '1.8'
+  }
+}
+
 jacoco {
   reportsDir = file("$buildDir/jacoco/reports")
 }
@@ -85,9 +91,9 @@ test {
           return "![jcenter](${badge('jcenter', v, '6688ff')}) &#x2003; " +
                  "![jcenter](${badge('Tests', "${total-failed}/${total}", color)}) &#x2003; " +
                  "![jcenter](${badge('Coverage', "${coverage}%25", 'blue')})"
-        case 10: return "[Download](${download}) the latest jar."
-        case 20: return "  <version>${v}</version>"
-        case 33: return "  compile 'info.jdavid.kotlin:json:${v}'"
+        case 9: return "[Download](${download}) the latest jar."
+        case 19: return "  <version>${v}</version>"
+        case 32: return "  compile 'info.jdavid.kotlin:json:${v}'"
         default: return line
       }
     }.join('\n').with { readme.text = it }
@@ -123,3 +129,39 @@ publishing {
     }
   }
 }
+
+bintray {
+  user = 'programingjd'
+  key = getBintrayApiKey()
+  dryRun = false
+  publish = true
+  publications = ['mavenJava']
+  pkg {
+    repo = 'maven'
+    name = 'info.jdavid.kotlin.json'
+    websiteUrl = 'https://github.com/programingjd/kotlin_json'
+    issueTrackerUrl = 'https://github.com/programingjd/kotlin_json/issues'
+    vcsUrl = 'https://github.com/programingjd/kotlin_json.git'
+    githubRepo = 'programingjd/kotlin_json'
+    githubReleaseNotesFile = 'README.md'
+    licenses = ['Apache-2.0']
+    labels = ['json','kotlin']
+    publicDownloadNumbers = true
+    version {
+      name = project.version
+      mavenCentralSync {
+        sync = false
+      }
+    }
+  }
+}
+
+tasks.bintrayUpload.dependsOn tasks.check
+
+def getBintrayApiKey() {
+  def f = new File("$projectDir/local.properties")
+  def key = f.text.splitEachLine('=', { if (it && it[0] == 'bintrayApiKey') return it[1] })
+  //println "Bintray key: ${key}"
+  return key
+}
+

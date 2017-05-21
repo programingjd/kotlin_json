@@ -4,11 +4,11 @@ A kotlin library providing a nice syntax for creating json objects.
 
 ## Download ##
 
-The maven artifacts are on [Bintray](https://bintray.com/programingjd/maven/info.jdavid.kotlin/view)
-and [jcenter](https://bintray.com/search?query=info.jdavid.kotlin).
+The maven artifacts are on [Bintray](https://bintray.com/programingjd/maven/info.jdavid.kotlin.json/view)
+and [jcenter](https://bintray.com/search?query=info.jdavid.kotlin.json).
 
-[Download](https://bintray.com/artifact/download/programingjd/maven/info/jdavid/kotlin/json/1.0.0/json-1.0.0.jar) the latest jar.
 [Download](https://bintray.com/artifact/download/programingjd/maven/info/jdavid/kotlin/1.0.0/json-1.0.0.jar) the latest jar.
+
 __Maven__
 
 Include [those settings](https://bintray.com/repo/downloadMavenRepoSettingsFile/downloadSettings?repoPath=%2Fbintray%2Fjcenter)
@@ -18,7 +18,7 @@ Include [those settings](https://bintray.com/repo/downloadMavenRepoSettingsFile/
   <groupId>info.jdavid.kotlin</groupId>
   <artifactId>json</artifactId>
   <version>1.0.0</version>
-  <version>1.0.0</version>
+</dependency>  
 ```
 __Gradle__
 
@@ -31,7 +31,7 @@ repositories {
 ```
 dependencies {
   compile 'info.jdavid.kotlin:json:1.0.0'
-  compile 'info.jdavid.kotlin:json:1.0.0'
+}
 ```
 
 ## Usage ##
