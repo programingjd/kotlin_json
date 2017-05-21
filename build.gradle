@@ -1,23 +1,33 @@
-group 'info.jdavid.kotlin'
-version '1.0.0'
-
 buildscript {
   ext.kotlin_version = '1.1.2-2'
 
   repositories {
-    mavenCentral()
+    jcenter()
   }
   dependencies {
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+    classpath 'org.jsoup:jsoup:1.10.2'
   }
 }
 
+group 'info.jdavid.kotlin'
+version '1.0.0'
+
 apply plugin: 'kotlin'
 apply plugin: 'jacoco'
-apply plugin: 'application'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+println "Java version: ${System.getProperty('java.version')}"
 
 repositories {
-  mavenCentral()
+  jcenter()
 }
 
 dependencies {
@@ -43,7 +53,54 @@ test {
     destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
     classDumpDir = file("$buildDir/jacoco/classpathdumps")
   }
+  doLast {
+    File html = reports.html.entryPoint
+    def doc = org.jsoup.Jsoup.parse(html, 'UTF-8')
+    int total = doc.select('#tests > .counter').text() as int
+    int failed = doc.select('#failures > .counter').text() as int
+    html = jacocoTestReport.reports.html.entryPoint
+    doc = org.jsoup.Jsoup.parse(html, 'UTF-8')
+    def imgs = doc.select('table.coverage>tbody>tr>.bar>img')
+    int missed = (imgs[0].attr('title').replaceAll(',','') as int) +
+                 (imgs[2].attr('title').replaceAll(',','') as int)
+    int all = (imgs[1].attr('title').replaceAll(',','') as int) +
+              (imgs[3].attr('title').replaceAll(',','') as int) + missed
+    int coverage = (100 * (all - missed) / all) as int
+    def readme = file('README.md')
+    def badge = { String label, String text, String color ->
+      "https://img.shields.io/badge/_${label}_-_${text}-${color}.png?style=flat"
+    }
+    String color = failed == 0 ? 'green' : (failed < 3 ? 'yellow' : 'red')
+    String v = project.version
+    def download =
+      "https://bintray.com/artifact/download/programingjd/maven/info/jdavid/kotlin/$v/json-${v}.jar"
+    readme.readLines().withIndex().collect { line, i ->
+      switch (i) {
+        case 0:
+          return "![jcenter](${badge('jcenter', v, '6688ff')}) &#x2003; " +
+                 "![jcenter](${badge('Tests', "${total-failed}/${total}", color)}) &#x2003; " +
+                 "![jcenter](${badge('Coverage', "${coverage}%25", 'blue')})"
+        case 10: return "[Download](${download}) the latest jar."
+        case 20: return "  <version>${v}</version>"
+        case 33: return "  compile 'info.jdavid.kotlin:json:${v}'"
+        default: return line
+      }
+    }.join('\n').with { readme.text = it }
+  }
   finalizedBy tasks.jacocoTestReport
 }
 
-mainClassName = 'BuilderKt'
+task javadocJar(type: Jar, dependsOn: javadoc) {
+  classifier = 'javadoc'
+  from javadoc.destinationDir
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+  classifier = 'sources'
+  from sourceSets.main.allSource
+}
+
+artifacts {
+  archives sourcesJar, javadocJar
+}
+
